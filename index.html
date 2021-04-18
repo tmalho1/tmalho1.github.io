@@ -26,7 +26,7 @@
 
             	var data = JSON.parse(request.responseText);
 			
-            	if (request.status == "CIT") {
+            	if (request.status == 200) {
             		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
 					
             		for(i = 0; i < data.length; i++) {

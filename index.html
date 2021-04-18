@@ -26,13 +26,13 @@
 
          cit5students = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
          function getMajor(item) {
-            return item.major == selected_meal;   // the new meal_items array will contain only items for the selected meal
+            return item.major == cit5students;   // the new meal_items array will contain only items for the selected meal
          }
         
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
-            compiledHtml = compiledTemplateText({ rows: meal_items })          
+            compiledHtml = compiledTemplateText({ rows: cit5students })          
             document.getElementById('menuTable').innerHTML = compiledHtml; 
         }
         else {

@@ -6,18 +6,18 @@
 
     <h1>Select a Major</h1>
         
-    <button type='button' class="btn btn-primary" onClick="getData('CIT)">CIT Majors</button>
-<button type='button' class="btn btn-primary" onClick="getData('BUS')">Business Majors</button>
+    <button onclick="myFunction()">CIT Majors</button>
+	<button onclick="myFunction()">Business Majors</button>
              
  	<div id="result"></div>
     
     <h3> We filter our dataset by major </h3>
 
 <script>
-   
+	   
     document.addEventListener('DOMContentLoaded', function() {      // when page has loaded, more or less
 													  
-    	function getData(majors) {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
+    	function myFunction() {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
  

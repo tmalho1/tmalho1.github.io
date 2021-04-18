@@ -9,6 +9,8 @@
     <input type="button" id='btn' value="CIT Majors">
              
  	<div id="result"></div>
+	
+	<h3> We filter our dataset by major </h3>
 
     
 <script>
@@ -24,7 +26,7 @@
 
             	var data = JSON.parse(request.responseText);
 			
-            	if (request.status == 200) {
+            	if (request.status == "CIT") {
             		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
 					
             		for(i = 0; i < data.length; i++) {

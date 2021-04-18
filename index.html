@@ -6,7 +6,7 @@
 
     <h1>Select a Major</h1>
         
-    <button type='button' class="btn btn-primary" onClick="getData('CIT)">CIT Majors</button> &nbsp;
+    <button type='button' class="btn btn-primary" onClick="getData('CIT)">CIT Majors</button>
 <button type='button' class="btn btn-primary" onClick="getData('BUS')">Business Majors</button>
              
  	<div id="result"></div>
@@ -17,66 +17,32 @@
    
     document.addEventListener('DOMContentLoaded', function() {      // when page has loaded, more or less
 													  
-    	document.querySelector('#btn1').onclick = function(){   // attach to button
+    	function getData(majors) {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
+      var request = new XMLHttpRequest();
+      request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
+ 
+      request.onload = function() {                     // when the data comes back, browser calls this function
+         var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
-        	var request = new XMLHttpRequest();
-        	request.open('GET', 'cit5students.json');
-
-        	request.onload = function(){
-
-            	var data = JSON.parse(request.responseText);
-			
-            	if (request.status == 200) {
-            		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
-					
-            		for(i = 0; i < data.length; i++) {
-                     	contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
-                	}
-					
-                	contents += "</table>";
-                	document.querySelector('#result').innerHTML = contents;
-            	}
-            	else {
-                	document.querySelector('#result').innerHTML = "There was an error.";
-            	}
+         meal_items = data.filter(getMeal)       // meal_itmes array will contain the filtered data using the getMeal() function
+         function getMeal(item) {
+            return item.meal == selected_meal;   // the new meal_items array will contain only items for the selected meal
+         }
+        
+        if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
+            var templateText = document.getElementById('tableTemplate').innerHTML;
+            var compiledTemplateText = Handlebars.compile(templateText);       
+            compiledHtml = compiledTemplateText({ rows: meal_items })          
+            document.getElementById('menuTable').innerHTML = compiledHtml; 
         }
-
-        request.send(null);
-    };
-	
-  });
-  
-  document.querySelector('#btn2').onclick = function(){   // attach to button
-
-        	var request = new XMLHttpRequest();
-        	request.open('GET', 'cit5students.json');
-
-        	request.onload = function(){
-
-            	var data = JSON.parse(request.responseText);
-			
-            	if (request.status == 200) {
-            		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
-					
-            		for(i = 0; i < data.length; i++) {
-                     	contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
-                	}
-					
-                	contents += "</table>";
-                	document.querySelector('#result').innerHTML = contents;
-            	}
-            	else {
-                	document.querySelector('#result').innerHTML = "There was an error.";
-            	}
+        else {
+            document.querySelector('#menuTable').innerHTML = "There was an error, or menu items not found";
         }
-
-        request.send(null);
-    };
-	
-  });
+     }
+     
+     request.send(null);
+  }
    
 </script>
-   
-   
 </body>
 </html>

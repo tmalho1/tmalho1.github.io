@@ -4,27 +4,55 @@
 </head>
 <body style='margin-left: 30px;'>
 
-    <h1>Select a Major</h1>
+    <h1>CIT7 Students</h1>
+    <p>CIT7 students: &nbsp;Exam 1 Scores</p>
         
-    <button onclick="myFunction()">CIT Majors</button>
-	<button onclick="myFunction()">Business Majors</button>
+    <input type="button" id='btn' value="Get Student Scores">
              
  	<div id="result"></div>
-    
-    <h3> We filter our dataset by major </h3>
 
+ 	<p> Example of the JSON data structure this Ajax request returns:&nbsp; an array of student objects.
+    <pre><strong>[
+ {"name":"Alice","midterm":95,"final":97},
+ {"name":"Bryan","midterm":68,"final":80}
+]
+ 	</strong></pre></p>
+    
 <script>
-	   
+   
     document.addEventListener('DOMContentLoaded', function() {      // when page has loaded, more or less
 													  
-    	function myFunction() {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
-      var request = new XMLHttpRequest();
-      request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
- 
-      request.onload = function() {                     // when the data comes back, browser calls this function
-         var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
-         }
+    	document.querySelector('#btn').onclick = function(){   // attach to button
+
+        	var request = new XMLHttpRequest();
+        	request.open('GET', 'cit5students.json');
+
+        	request.onload = function(){
+
+            	var data = JSON.parse(request.responseText);
+			
+            	if (request.status == 200) {
+            		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Midterm</td><td>Final</td></tr>"
+					
+            		for(i = 0; i < data.length; i++) {
+                     	contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
+                	}
+					
+                	contents += "</table>";
+                	document.querySelector('#result').innerHTML = contents;
+            	}
+            	else {
+                	document.querySelector('#result').innerHTML = "There was an error.";
+            	}
+        }
+
+        request.send(null);
+    };
+	
+  });
    
 </script>
+   
+   
 </body>
 </html>

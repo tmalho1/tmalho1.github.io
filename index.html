@@ -26,10 +26,7 @@
         	request.onload = function(){
 		
             	var data = JSON.parse(request.responseText);
-			
-		 cit5students = data.filter('CIT')       // meal_itmes array will contain the filtered data using the getMeal() function
-         }
-			
+				
             	if (request.status == 200) {
             		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
 					

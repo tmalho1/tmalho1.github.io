@@ -1,54 +1,59 @@
 <!DOCTYPE html>
-<html><head>  <meta charset="UTF-8">
-        <title>students</title>
+  <html><head><title>cars 4 sale</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script> 
 </head>
-<body style='margin-left: 30px;'>
 
-    <h1>Select a Major</h1>
-        
-    <button id= "btn" onclick="filterSelection('CIT')">CIT Majors</button> 
-    <button id= "btn" onclick="filterSelection('BUS')">Business Majors</button>
-	
- 	<div id="result"></div>
-	
-	<h3> We filter our dataset by major </h3>
+<body ng-app = "carsApp">
 
-    
-<script>
-   
-    document.addEventListener('DOMContentLoaded', function() {
-													  
-    	document.querySelector('#btn').onclick = function(){
 
-        	var request = new XMLHttpRequest();
-        	request.open('GET', 'cit5students.json');
+<div class="container">
+    <nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+         <a class="navbar-brand" href="#">Our Website</a>
+    </div>
+    <div>
+         <ul class="nav navbar-nav">
+             <li class="active"><a href="index.html">Welcome</a></li>
+             <li><a href="all_cars.html">All the Cars</a></li>
+         </ul>
+    </div>
+    </nav>    <!-- end nav-bar -->
 
-        	request.onload = function(){
-		
-            	var data = JSON.parse(request.responseText);
-				
-            	if (request.status == 200) {
-            		var contents = "<table cellspacing='5'><tr><td>Name</td><td>Major</td><td>Midterm</td><td>Final</td></tr>"
-					
-            		for(i = 0; i < data.length; i++) {
-                     	contents += "<tr><td>" + data[i].name + "</td><td>" + data[i].major + "</td><td>" + data[i].midterm + "</td><td>" + data[i].final + "</td></tr>";
-                	}
-					
-                	contents += "</table>";
-                	document.querySelector('#result').innerHTML = contents;
-            	}
-            	else {
-                	document.querySelector('#result').innerHTML = "There was an error.";
-            	}
-        }
+    <div ng-controller = "allCtrl">
 
-        request.send(null);
-    };
-	
-  });
-   
+    <h2>All Cars</h2>
+       <p><input type='text' ng-model='search_text' > Enter Search text</p>
+       <table class="table table-bordered table-striped">
+           <tr>
+             <th>id</th> <th>year</th> <th>make</th> <th>model</th> <th>miles</th> <th>price</th> <th>dealer</th>
+           </tr>
+  
+           <tr ng-repeat = "car in cars | filter:search_text">  <!-- filter by search textbox value -->
+               <td>{{car.id}}</td>
+               <td>{{car.year}}</td>
+               <td>{{car.make}}</td>
+               <td>{{car.model}}</td>
+               <td>{{car.miles}}</td>
+               <td>{{car.price | currency}}</td>
+               <td>{{car.dealer}}</td>
+           </tr>
+       </table>
+     </div>   <!-- end carsApp -->
+  </div>   <!-- end class= 'container' -->
+
+  <script>
+      var app = angular.module('carsApp', []);
+      app.controller('allCtrl', function($scope, $http) {
+  
+          $http.get("cars.json")          // get all the car data
+          .then(function (response) {
+               $scope.cars = response.data;    // put the data in the table
+          });
+
+       });
+
 </script>
-   
-   
-</body>
-</html>
+  </body></html>

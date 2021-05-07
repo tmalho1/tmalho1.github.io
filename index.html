@@ -32,13 +32,13 @@
            </tr>
   
            <tr ng-repeat = "car in cars | filter:search_text">  <!-- filter by search textbox value -->
-                <td>{{(student.gpa_points / student.credit_hrs).toFixed(1)}}</td
-               <td>{{students.sid}}</td>
-               <td>{{students.last name}}</td>
-               <td>{{students.first name}}</td>
-               <td>{{students.credit hrs}}</td>
-               <td>{{students.gpa points}}</td>
-               <td>{{students.major}}</td>
+               <td>{{car.id}}</td>
+               <td>{{car.year}}</td>
+               <td>{{car.make}}</td>
+               <td>{{car.model}}</td>
+               <td>{{car.miles}}</td>
+               <td>{{car.price | currency}}</td>
+               <td>{{car.dealer}}</td>
            </tr>
        </table>
      </div>   <!-- end carsApp -->

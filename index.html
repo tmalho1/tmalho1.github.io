@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-  <html><head><title>cars 4 sale</title>
+  <html><head><title>Programming Project 6</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script> 
 </head>
 
-<body ng-app = "carsApp">
+<body ng-app = "Students">
 
 
 <div class="container">
@@ -16,29 +16,29 @@
     </div>
     <div>
          <ul class="nav navbar-nav">
-             <li class="active"><a href="index.html">Welcome</a></li>
-             <li><a href="all_cars.html">All the Cars</a></li>
+             <li class="active"><a href="index.html">All Advisees</a></li>
+             <li><a href="gpa.html">Grade Point Averages</a></li>
          </ul>
     </div>
     </nav>    <!-- end nav-bar -->
 
     <div ng-controller = "allCtrl">
 
-    <h2>All Cars</h2>
+    <h2>Advisees</h2>
        <p><input type='text' ng-model='search_text' > Enter Search text</p>
        <table class="table table-bordered table-striped">
            <tr>
-             <th>id</th> <th>year</th> <th>make</th> <th>model</th> <th>miles</th> <th>price</th> <th>dealer</th>
+             <th>sid</th> <th>last name</th> <th>first name</th> <th>credit hrs</th> <th>gpa points</th> <th>major</th>
            </tr>
   
            <tr ng-repeat = "car in cars | filter:search_text">  <!-- filter by search textbox value -->
-               <td>{{car.id}}</td>
-               <td>{{car.year}}</td>
-               <td>{{car.make}}</td>
-               <td>{{car.model}}</td>
-               <td>{{car.miles}}</td>
-               <td>{{car.price | currency}}</td>
-               <td>{{car.dealer}}</td>
+                <td>{{(student.gpa_points / student.credit_hrs).toFixed(1)}}</td
+               <td>{{students.sid}}</td>
+               <td>{{students.last name}}</td>
+               <td>{{students.first name}}</td>
+               <td>{{students.credit hrs}}</td>
+               <td>{{students.gpa points}}</td>
+               <td>{{students.major}}</td>
            </tr>
        </table>
      </div>   <!-- end carsApp -->

@@ -31,13 +31,13 @@
              <th>sid</th> <th>last name</th> <th>first name</th> <th>credit hrs</th> <th>gpa points</th> <th>major</th>
            </tr>
   
-           <tr ng-repeat = "car in cars | filter:search_text">  <!-- filter by search textbox value -->
-               <td>{{car.id}}</td>
-               <td>{{car.year}}</td>
-               <td>{{car.make}}</td>
-               <td>{{car.model}}</td>
-               <td>{{car.miles}}</td>
-               <td>{{car.price | currency}}</td>
+           <tr ng-repeat = "i in students | filter:search_text">  <!-- filter by search textbox value -->
+               <td>{{students.sid}}</td>
+               <td>{{students.last_name}}</td>
+               <td>{{students.first_name}}</td>
+               <td>{{students.credit_hrs}}</td>
+               <td>{{students.gpa_points}}</td>
+               <td>{{students.major}}</td>
            </tr>
        </table>
      </div>   <!-- end carsApp -->

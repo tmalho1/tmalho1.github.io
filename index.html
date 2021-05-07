@@ -6,7 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script> 
 </head>
 
-<body ng-app = "Students">
+<body ng-app = "studentsApp"
 
 
 <div class="container">
@@ -20,7 +20,7 @@
              <li><a href="gpa.html">Grade Point Averages</a></li>
          </ul>
     </div>
-    </nav>    <!-- end nav-bar -->
+    </nav>
 
     <div ng-controller = "allCtrl">
 
@@ -31,25 +31,25 @@
              <th>sid</th> <th>last name</th> <th>first name</th> <th>credit hrs</th> <th>gpa points</th> <th>major</th>
            </tr>
   
-           <tr ng-repeat = "i in students | filter:search_text">  <!-- filter by search textbox value -->
-               <td>{{students.sid}}</td>
-               <td>{{students.last_name}}</td>
-               <td>{{students.first_name}}</td>
-               <td>{{students.credit_hrs}}</td>
-               <td>{{students.gpa_points}}</td>
-               <td>{{students.major}}</td>
+           <tr ng-repeat = "i in students | filter:search_text"> 
+               <td>{{i.sid}}</td>
+               <td>{{i.last_name}}</td>
+               <td>{{i.first_name}}</td>
+               <td>{{i.credit_hrs}}</td>
+               <td>{{i.gpa_points}}</td>
+               <td>{{i.major}}</td>
            </tr>
        </table>
-     </div>   <!-- end carsApp -->
-  </div>   <!-- end class= 'container' -->
+     </div>
+  </div>
 
   <script>
       var app = angular.module('studentsApp', []);
       app.controller('allCtrl', function($scope, $http) {
   
-          $http.get("students.json")          // get all the car data
+          $http.get("students.json")
           .then(function (response) {
-               $scope.students = response.data;    // put the data in the table
+               $scope.students = response.data;
           });
 
        });
